@@ -1,7 +1,7 @@
 # Read Me First
 The following was discovered as part of building this project:
 
-* The original package name 'com.example.member-api' is invalid and this project uses 'com.example.memberapi' instead.
+* The original package name 'com.msa-web.member-api' is invalid and this project uses 'com.msaweb.memberapi' instead.
 
 # Getting Started
 
