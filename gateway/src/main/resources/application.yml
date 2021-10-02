@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8081
 
 ---
 spring:
@@ -7,19 +7,19 @@ spring:
     gateway:
       default-filters:
         - name: GlobalFilter
-          args:
-            preFilter: true
-            postFilter: true
+#          args:
+#            preFilter: true
+#            postFilter: true
       routes:
         - id: member-svc
-          uri: http://localhost:8081/
+          uri: http://localhost:8080/
           predicates:
             - Path=/member/**
           filters:
             - name: MemberFilter
-              args:
-                preFilter: true
-                postFilter: true
+#              args:
+#                preFilter: true
+#                postFilter: true
 
 logging:
   level:
