@@ -5,12 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6c75a03a-c95d-4976-bc3d-2df1ba70f271" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -23,6 +30,9 @@
     </option>
   </component>
   <component name="ProjectId" id="1yDT32S0vSijPo2gT2BrtwdSZDt" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
@@ -109,7 +119,8 @@
       <workItem from="1631855193331" duration="393000" />
       <workItem from="1633005809344" duration="870000" />
       <workItem from="1633007645351" duration="193000" />
-      <workItem from="1633174344973" duration="157000" />
+      <workItem from="1633174344973" duration="803000" />
+      <workItem from="1633257630337" duration="658000" />
     </task>
     <servers />
   </component>
@@ -121,6 +132,10 @@
       <screen x="1440" y="-863" width="3440" height="1417" />
     </state>
     <state x="3624" y="-519" key="#New_Docker_Connection/0.23.1440.829/1440.-863.3440.1417@1440.-863.3440.1417" timestamp="1633005887089" />
+    <state x="2286" y="-523" key="#com.intellij.ide.util.MemberChooser" timestamp="1633174693983">
+      <screen x="1440" y="-863" width="3440" height="1417" />
+    </state>
+    <state x="2286" y="-523" key="#com.intellij.ide.util.MemberChooser/0.23.1440.829/1440.-863.3440.1417@1440.-863.3440.1417" timestamp="1633174693983" />
     <state width="2132" height="1052" key="GridCell.Tab.0.bottom" timestamp="1633007082222">
       <screen x="1440" y="-863" width="3440" height="1417" />
     </state>
