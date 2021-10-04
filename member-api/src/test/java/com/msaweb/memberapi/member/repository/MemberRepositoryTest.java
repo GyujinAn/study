@@ -1,6 +1,6 @@
-package com.msaweb.memberapi.repository;
+package com.msaweb.memberapi.member.repository;
 
-import com.msaweb.memberapi.model.Admin;
+import com.msaweb.memberapi.member.model.entity.Admin;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

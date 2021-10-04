@@ -1,4 +1,4 @@
-package com.msaweb.login.model;
+package com.msaweb.memberapi.login.model;
 
 import lombok.Getter;
 import lombok.Setter;

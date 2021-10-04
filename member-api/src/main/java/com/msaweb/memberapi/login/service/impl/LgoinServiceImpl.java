@@ -1,9 +1,9 @@
-package com.msaweb.login.service.impl;
+package com.msaweb.memberapi.login.service.impl;
 
-import com.msaweb.login.model.LoginVo;
-import com.msaweb.login.service.LoginService;
-import com.msaweb.memberapi.model.Admin;
-import com.msaweb.memberapi.repository.MemberRepository;
+import com.msaweb.memberapi.login.model.LoginVo;
+import com.msaweb.memberapi.login.service.LoginService;
+import com.msaweb.memberapi.member.model.entity.Admin;
+import com.msaweb.memberapi.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

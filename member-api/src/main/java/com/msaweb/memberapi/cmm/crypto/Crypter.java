@@ -1,9 +1,8 @@
-package com.msaweb.cmm.crypto;
+package com.msaweb.memberapi.cmm.crypto;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
 import java.util.Arrays;
@@ -14,12 +13,12 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-import cloudPlatform.cmm.util.cyptoutil.ARIAEngine;
+//import cloudPlatform.cmm.util.cyptoutil.ARIAEngine;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import cloudPlatform.cmm.constant.CloudPlatformConstant;
+//import cloudPlatform.cmm.constant.CloudPlatformConstant;
 import lombok.extern.slf4j.Slf4j;
 
 @Component("crypto")
@@ -30,7 +29,7 @@ public class Crypter {
 	private String IV;
 
 	//Vault 생성자 주입
-	public Crypter(@Value("${adp.crypto.key}") String EGOVKEY){
+	public Crypter(@Value("${crypto.key}") String EGOVKEY){
 		this.secretKey = EGOVKEY;
 		this.IV = secretKey.substring(0, 16);
 	}
@@ -797,7 +796,6 @@ public class Crypter {
 		if(null == input || "".equals(input)) {
 
 			strDecrypt = "false";
-			log.info(CloudPlatformConstant.EMPTY_VALUE);
 
 		} else {
 
@@ -851,206 +849,206 @@ public class Crypter {
 
 	}
 
-	/**
-	 * base64 decoder
-	 */
-	public String decodeBase64(String str) {
-
-		String result = "";
-
-		try {
-			java.util.Base64.Decoder decoder = java.util.Base64.getDecoder();
-
-			result = new String(decoder.decode(str), "UTF-8");
-		} catch (IndexOutOfBoundsException e) {
-			log.error(e.getMessage(), e);
-			result = null;
-		} catch (IllegalArgumentException e) {
-			log.error(e.getMessage(), e);
-			result = null;
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-			result = null;
-		}
-
-		return result;
-	}
-
-	/**
-	 * base64 encoder
-	 */
-	public String encodeBase64(String str) {
-
-		String result = "";
-
-		try {
-			java.util.Base64.Encoder encoder = java.util.Base64.getEncoder();
-			result = new String(encoder.encode(str.getBytes("UTF-8")));
-		} catch (IndexOutOfBoundsException e) {
-			log.error(e.getMessage(), e);
-			result = null;
-		} catch (IllegalArgumentException e) {
-			log.error(e.getMessage(), e);
-			result = null;
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-			result = null;
-		}
-
-		return result;
-	}
-
-	public String decodeBase64ByApache(String str) {
-
-		String result = null;
-
-		try {
-			result = new String(Base64.decodeBase64(str.getBytes()));
-		} catch (IndexOutOfBoundsException e) {
-			log.error(e.getMessage(), e);
-			result = null;
-		} catch (IllegalArgumentException e) {
-			log.error(e.getMessage(), e);
-			result = null;
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-			result = null;
-		}
-
-		return result;
-
-	}
-
-	public String encodeBase64ByApache(String str) {
-
-		String result = null;
-
-		try {
-			result = new String(Base64.encodeBase64(str.getBytes()));
-		} catch (IndexOutOfBoundsException e) {
-			log.error(e.getMessage(), e);
-			result = null;
-		} catch (IllegalArgumentException e) {
-			log.error(e.getMessage(), e);
-			result = null;
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-			result = null;
-		}
-
-		return result;
-
-	}
-
-	//TODO: 신규 암호화 (salt 생성, ARIA enc/dec)
-	public String makeHashDrbg(int saltByte) {
-
-		String ret = null;
-		String drbgString = null;
-
-		try {
-			EntropySourceProvider provider = new BasicEntropySourceProvider(new SecureRandom(), true);
-			byte[] nonce = new byte[256];
-			new SecureRandom().nextBytes(nonce);
-
-			byte[] saltBytes = new byte[saltByte];
-			new SecureRandom().nextBytes(saltBytes);
-			StringBuffer salt = new StringBuffer();
-
-			for(int i = 0; i < saltBytes.length; i++) {
-				salt.append(String.format("%02x", saltBytes[i]));
-			}
-
-			drbgString = new String(salt.toString().getBytes(), "UTF-8");
-			HashSP800DRBG drbg = new HashSP800DRBG(new SHA256Digest(), 256, provider.get(256),null,nonce);
-			byte[] out = new byte[256];
-			drbg.generate(out, drbgString.getBytes(), true);
-			StringBuffer hexString = new StringBuffer();
-
-			for(int i = 0; i < out.length; i++) {
-				String h = Integer.toHexString(0xff & out[i]);
-				while (h.length() < 2)
-					h = "0" + h;
-				hexString.append(h);
-			}
-			ret = new String(hexString.toString().getBytes(), "UTF-8");
-			if(null != ret && ret.length() > saltByte) {
-				ret = ret.substring(0, saltByte);
-			}
-		} catch(NullPointerException e) {
-			log.error(e.getMessage(), e);
-		} catch(UnsupportedEncodingException e) {
-			log.error(e.getMessage(), e);
-		} catch(IndexOutOfBoundsException e) {
-			log.error(e.getMessage(), e);
-		} catch(Exception e) {
-			log.error(e.getMessage(), e);
-		}
-
-		return ret;
-	}
-
-	public String ariaEncrypt(String input) {
-
-		String ret = null;
-
-		if(null != input && !input.equals("")) {
-
-			try {
-				byte[] p;
-				byte[] c;
-				ARIAEngine instance = new ARIAEngine(256, secretKey);
-				p = new byte[input.getBytes().length];
-				p = input.getBytes();
-
-				int len = input.getBytes().length;
-				if ((len % 16) != 0) {
-					len = (len / 16 + 1) * 16;
-				}
-				c = new byte[len];
-				System.arraycopy(p, 0, c, 0, p.length);
-				instance.encrypt(p, c, p.length);
-
-				ret = ARIAEngine.byteArrayToHex(c).toUpperCase();
-			} catch (InvalidKeyException e) {
-				log.error(e.getMessage(), e);
-			}
-		} else {
-			log.debug("Input String is empty check Param");
-		}
-
-		return ret;
-	}
-
-	public String ariaDecrypt(String encInput) {
-
-		String ret = null;
-
-		if(null != encInput && !encInput.equals("")) {
-
-			try {
-				byte[] p;
-				byte[] c;
-				ARIAEngine instance = new ARIAEngine(256, secretKey);
-
-				c = ARIAEngine.hexToByteArray(encInput);
-				p = new byte[c.length];
-				instance.decrypt(c, p, p.length);
-
-				StringBuffer buf = new StringBuffer();
-				buf.append(new String(p));
-
-				ret = buf.toString().trim();
-			} catch (InvalidKeyException e) {
-				log.error(e.getMessage(), e);
-			} catch(NullPointerException e) {
-				log.error(e.getMessage(), e);
-			}
-		} else {
-			log.debug("EncInput is empty check Param");
-		}
-
-		return ret;
-	}
+//	/**
+//	 * base64 decoder
+//	 */
+//	public String decodeBase64(String str) {
+//
+//		String result = "";
+//
+//		try {
+//			java.util.Base64.Decoder decoder = java.util.Base64.getDecoder();
+//
+//			result = new String(decoder.decode(str), "UTF-8");
+//		} catch (IndexOutOfBoundsException e) {
+//			log.error(e.getMessage(), e);
+//			result = null;
+//		} catch (IllegalArgumentException e) {
+//			log.error(e.getMessage(), e);
+//			result = null;
+//		} catch (Exception e) {
+//			log.error(e.getMessage(), e);
+//			result = null;
+//		}
+//
+//		return result;
+//	}
+//
+//	/**
+//	 * base64 encoder
+//	 */
+//	public String encodeBase64(String str) {
+//
+//		String result = "";
+//
+//		try {
+//			java.util.Base64.Encoder encoder = java.util.Base64.getEncoder();
+//			result = new String(encoder.encode(str.getBytes("UTF-8")));
+//		} catch (IndexOutOfBoundsException e) {
+//			log.error(e.getMessage(), e);
+//			result = null;
+//		} catch (IllegalArgumentException e) {
+//			log.error(e.getMessage(), e);
+//			result = null;
+//		} catch (Exception e) {
+//			log.error(e.getMessage(), e);
+//			result = null;
+//		}
+//
+//		return result;
+//	}
+//
+//	public String decodeBase64ByApache(String str) {
+//
+//		String result = null;
+//
+//		try {
+//			result = new String(Base64.decodeBase64(str.getBytes()));
+//		} catch (IndexOutOfBoundsException e) {
+//			log.error(e.getMessage(), e);
+//			result = null;
+//		} catch (IllegalArgumentException e) {
+//			log.error(e.getMessage(), e);
+//			result = null;
+//		} catch (Exception e) {
+//			log.error(e.getMessage(), e);
+//			result = null;
+//		}
+//
+//		return result;
+//
+//	}
+//
+//	public String encodeBase64ByApache(String str) {
+//
+//		String result = null;
+//
+//		try {
+//			result = new String(Base64.encodeBase64(str.getBytes()));
+//		} catch (IndexOutOfBoundsException e) {
+//			log.error(e.getMessage(), e);
+//			result = null;
+//		} catch (IllegalArgumentException e) {
+//			log.error(e.getMessage(), e);
+//			result = null;
+//		} catch (Exception e) {
+//			log.error(e.getMessage(), e);
+//			result = null;
+//		}
+//
+//		return result;
+//
+//	}
+//
+//	//TODO: 신규 암호화 (salt 생성, ARIA enc/dec)
+//	public String makeHashDrbg(int saltByte) {
+//
+//		String ret = null;
+//		String drbgString = null;
+//
+//		try {
+//			EntropySourceProvider provider = new BasicEntropySourceProvider(new SecureRandom(), true);
+//			byte[] nonce = new byte[256];
+//			new SecureRandom().nextBytes(nonce);
+//
+//			byte[] saltBytes = new byte[saltByte];
+//			new SecureRandom().nextBytes(saltBytes);
+//			StringBuffer salt = new StringBuffer();
+//
+//			for(int i = 0; i < saltBytes.length; i++) {
+//				salt.append(String.format("%02x", saltBytes[i]));
+//			}
+//
+//			drbgString = new String(salt.toString().getBytes(), "UTF-8");
+//			HashSP800DRBG drbg = new HashSP800DRBG(new SHA256Digest(), 256, provider.get(256),null,nonce);
+//			byte[] out = new byte[256];
+//			drbg.generate(out, drbgString.getBytes(), true);
+//			StringBuffer hexString = new StringBuffer();
+//
+//			for(int i = 0; i < out.length; i++) {
+//				String h = Integer.toHexString(0xff & out[i]);
+//				while (h.length() < 2)
+//					h = "0" + h;
+//				hexString.append(h);
+//			}
+//			ret = new String(hexString.toString().getBytes(), "UTF-8");
+//			if(null != ret && ret.length() > saltByte) {
+//				ret = ret.substring(0, saltByte);
+//			}
+//		} catch(NullPointerException e) {
+//			log.error(e.getMessage(), e);
+//		} catch(UnsupportedEncodingException e) {
+//			log.error(e.getMessage(), e);
+//		} catch(IndexOutOfBoundsException e) {
+//			log.error(e.getMessage(), e);
+//		} catch(Exception e) {
+//			log.error(e.getMessage(), e);
+//		}
+//
+//		return ret;
+//	}
+//
+//	public String ariaEncrypt(String input) {
+//
+//		String ret = null;
+//
+//		if(null != input && !input.equals("")) {
+//
+//			try {
+//				byte[] p;
+//				byte[] c;
+//				ARIAEngine instance = new ARIAEngine(256, secretKey);
+//				p = new byte[input.getBytes().length];
+//				p = input.getBytes();
+//
+//				int len = input.getBytes().length;
+//				if ((len % 16) != 0) {
+//					len = (len / 16 + 1) * 16;
+//				}
+//				c = new byte[len];
+//				System.arraycopy(p, 0, c, 0, p.length);
+//				instance.encrypt(p, c, p.length);
+//
+//				ret = ARIAEngine.byteArrayToHex(c).toUpperCase();
+//			} catch (InvalidKeyException e) {
+//				log.error(e.getMessage(), e);
+//			}
+//		} else {
+//			log.debug("Input String is empty check Param");
+//		}
+//
+//		return ret;
+//	}
+//
+//	public String ariaDecrypt(String encInput) {
+//
+//		String ret = null;
+//
+//		if(null != encInput && !encInput.equals("")) {
+//
+//			try {
+//				byte[] p;
+//				byte[] c;
+//				ARIAEngine instance = new ARIAEngine(256, secretKey);
+//
+//				c = ARIAEngine.hexToByteArray(encInput);
+//				p = new byte[c.length];
+//				instance.decrypt(c, p, p.length);
+//
+//				StringBuffer buf = new StringBuffer();
+//				buf.append(new String(p));
+//
+//				ret = buf.toString().trim();
+//			} catch (InvalidKeyException e) {
+//				log.error(e.getMessage(), e);
+//			} catch(NullPointerException e) {
+//				log.error(e.getMessage(), e);
+//			}
+//		} else {
+//			log.debug("EncInput is empty check Param");
+//		}
+//
+//		return ret;
+//	}
 
 }

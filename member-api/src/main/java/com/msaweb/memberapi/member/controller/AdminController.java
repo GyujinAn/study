@@ -1,10 +1,7 @@
-package com.msaweb.memberapi.controller;
+package com.msaweb.memberapi.member.controller;
 
-import com.msaweb.memberapi.model.Admin;
-import com.msaweb.memberapi.repository.MemberRepository;
+import com.msaweb.memberapi.member.model.entity.Admin;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -13,28 +10,23 @@ import org.springframework.web.bind.annotation.*;
  */
 
 @RestController
+@RequestMapping("/member")
 @RequiredArgsConstructor
 public class AdminController{
 
-    private final MemberRepository memberRepository;
+
 
     @GetMapping("/admin/{id}")
-    @Transactional
     public Admin read(@PathVariable long id) {
 
-        Admin admin = memberRepository.findAdmin(id);
-        return admin;
+        return null;
     }
 
 
     @PostMapping("/admin")
-    @Transactional
     public Long create(@RequestBody Admin admin) {
 
-
-        Long id = memberRepository.save(admin);
-
-        return id;
+        return 0L;
     }
 
     @PutMapping("/admin/{id}")

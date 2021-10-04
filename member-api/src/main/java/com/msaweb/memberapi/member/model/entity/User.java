@@ -1,4 +1,4 @@
-package com.msaweb.memberapi.model;
+package com.msaweb.memberapi.member.model.entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +12,6 @@ import javax.persistence.Entity;
 @Entity
 @Getter
 @Setter
-public class Provider extends Member{
-    String etc;
+public class User extends Member{
+    private String etc;
 }

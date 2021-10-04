@@ -17,4 +17,5 @@ logging:
     org.hibernate.SQL: debug
     org.hibernate.type: trace
 
-
+crypto:
+  key: helloworld

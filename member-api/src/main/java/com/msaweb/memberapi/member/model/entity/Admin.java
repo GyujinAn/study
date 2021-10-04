@@ -1,4 +1,4 @@
-package com.msaweb.memberapi.model;
+package com.msaweb.memberapi.member.model.entity;
 
 import lombok.Getter;
 import lombok.Setter;

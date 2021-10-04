@@ -1,6 +1,5 @@
-package com.msaweb.memberapi.model;
+package com.msaweb.memberapi.member.model.entity;
 
-import jdk.jfr.Category;
 import lombok.Getter;
 import lombok.Setter;
 

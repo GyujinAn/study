@@ -1,8 +1,8 @@
-package com.msaweb.login.controller;
+package com.msaweb.memberapi.login.controller;
 
-import com.msaweb.login.model.LoginVo;
-import com.msaweb.login.service.LoginService;
-import com.msaweb.memberapi.model.Admin;
+import com.msaweb.memberapi.login.model.LoginVo;
+import com.msaweb.memberapi.login.service.LoginService;
+import com.msaweb.memberapi.member.model.entity.Admin;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
