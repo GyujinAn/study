@@ -9,7 +9,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="member-api" />
         <module name="gateway" />
-        <module name="msa-web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
