@@ -39,12 +39,20 @@ public class DesignTacoController {
                 new Ingredient("SRCR", "Sour Cream", Type.SAUCE)
         );
 
+        int [] arr = new int[5];
+        Arrays.setAll(arr, (i) -> (int)(Math.random()*5)+1);
+
+
         Type[] types = Ingredient.Type.values();
 
         for(Type type : types){
             model.addAttribute(type.toString().toLowerCase(),
                     filterByType(ingredients, type));
         }
+
+        model.addAttribute("taco", new Taco());
+
+        log.info("model in showDesignForm: "+model.toString());
 
         return "design";
     }
