@@ -7,5 +7,5 @@ import tacos.Order;
  * @since 2021/10/14
  */
 public interface OrderRepository {
-    Order save();
+    Order save(Order order);
 }

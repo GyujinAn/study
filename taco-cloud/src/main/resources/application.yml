@@ -1,0 +1,19 @@
+#devtool를 통해서 이미 아래의 설정이 false로 되어있다.
+#spring.thymeleaf.cache=false
+
+#logging.level.root=debug
+
+#spring:
+#  datasource:
+#    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:tcp://localhost/~/workspace/h2/sample-db
+#    username: sa
+#    password:
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=mysql;
+    platform: h2
+    username: sa
+    password:
+    driverClassName: org.h2.Driver

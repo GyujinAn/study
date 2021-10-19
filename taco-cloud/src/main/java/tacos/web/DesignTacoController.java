@@ -13,6 +13,8 @@ import tacos.Taco;
 import tacos.data.IngredientRepository;
 import tacos.data.TacoRepository;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,7 +42,9 @@ public class DesignTacoController {
     }
 
     @GetMapping
-    public String showDesignForm(Model model){
+    public String showDesignForm(Model model, HttpServletRequest request){
+
+        HttpSession session = request.getSession();
 
 //        List<Ingredient> ingredients = Arrays.asList(
 //                new Ingredient("FLTO", "Flour Tortilla", Type.WRAP),
@@ -72,6 +76,10 @@ public class DesignTacoController {
         model.addAttribute("taco", new Taco());
 
         log.info("model in showDesignForm: "+model.toString());
+        log.info("session in showDesignForm: "+session.toString());
+        log.info("order in session: "+session.getAttribute("order"));
+        log.info("taco in session: "+session.getAttribute("taco"));
+
 
         return "design";
     }
@@ -86,25 +94,31 @@ public class DesignTacoController {
 
     @ModelAttribute(name ="order")
     public Order order(){
-
+        log.info("DesignTacoController.order() is called");
         return new Order();
     }
 
     @ModelAttribute(name = "taco")
     public Taco taco() {
-
+        log.info("DesignTacoController.taco() is called");
         return new Taco();
     }
 
     @PostMapping
-    public String processDesign(@Valid Taco design, Errors errors, @ModelAttribute Order order){
+    public String processDesign(@Valid Taco design, Errors errors, @ModelAttribute Order order, HttpSession session, Model model){
+        log.info("started processDesign");
         if (errors.hasErrors()){
+            log.info(errors.toString());
             return "design";
         }
 
+        log.info("session in processDesign " + session.getAttribute("order"));
+        log.info("session in processDesign " + session.getAttribute("taco"));
+        log.info("model in processDesign " + model.toString());
+
         log.info("Processing design: " + design);
-        //Taco saved = tacoRepository.save(design);
-        //order.addDesign(saved);
+        Taco saved = tacoRepository.save(design);
+        order.addDesign(saved);
 
         return "redirect:/orders/current";
     }
