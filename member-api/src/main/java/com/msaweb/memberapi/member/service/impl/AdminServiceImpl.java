@@ -1,38 +1,20 @@
 package com.msaweb.memberapi.member.service.impl;
 
 import com.msaweb.memberapi.member.model.entity.Admin;
-import com.msaweb.memberapi.member.model.entity.User;
-import com.msaweb.memberapi.member.service.AdminService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import com.msaweb.memberapi.member.service.AbstractMemberService;
 
 /**
  * @author agj017@gmail.com
- * @since 2021/10/04
+ * @since 2021/10/19
  */
-@Service
-@Transactional
-public class AdminServiceImpl implements AdminService {
-
+public class AdminServiceImpl extends AbstractMemberService<Admin> {
     @Override
-    public Admin get(Long id) {
-        return null;
+    protected Long getMemberId(Admin member) {
+        return member.getId();
     }
 
     @Override
-    public Long save(Admin admin) {
+    protected Long putMemberInfo(Admin member) {
         return null;
-    }
-
-    @Override
-    public Long update(Admin admin) {
-        return null;
-    }
-
-    @Override
-    public void delete(Long id) {
-
     }
 }

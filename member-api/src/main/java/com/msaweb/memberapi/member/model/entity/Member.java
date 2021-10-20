@@ -29,11 +29,18 @@ public abstract class Member {
 
     private String name;
 
+    @Enumerated(EnumType.STRING)
+    private MemberStatus status;
+
+    @Enumerated(EnumType.STRING)
+    private MemberRole role;
+
     private LocalDateTime orderData;
 
 //    @ManyToOne
 //    @JoinColumn(name="division_id")
 //    private Division division;
+
 
 
 }

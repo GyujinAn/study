@@ -1,31 +1,30 @@
 package com.msaweb.memberapi.member.service.impl;
 
+import com.msaweb.memberapi.member.model.entity.Admin;
+import com.msaweb.memberapi.member.model.entity.Provider;
 import com.msaweb.memberapi.member.service.MemberService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author agj017@gmail.com
  * @since 2021/10/04
  */
 @Service
-public class MemberServiceImpl<T> implements MemberService<T> {
-
-
+@Transactional
+public class ProviderService implements MemberService<Provider> {
     @Override
-    public T get(Long id) {
+    public Provider get(Long id) {
         return null;
     }
 
     @Override
-    public Long save(T admin) {
+    public Long save(Provider provider) {
         return null;
     }
 
     @Override
-    public Long update(T admin) {
+    public Long update(Provider provider) {
         return null;
     }
 

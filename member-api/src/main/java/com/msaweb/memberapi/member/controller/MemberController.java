@@ -1,44 +1,43 @@
 package com.msaweb.memberapi.member.controller;
 
 import com.msaweb.memberapi.member.model.entity.Admin;
-import com.msaweb.memberapi.member.model.entity.Member;
 import com.msaweb.memberapi.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 /**
  * @author agj017@gmail.com
- * @since 2021/09/17
+ * @since 2021/10/19
  */
-
-@RestController
-@RequestMapping("/member/admin")
 @RequiredArgsConstructor
-public class AdminController{
-
-    private final MemberService<Admin> memberService;
+abstract class MemberController<T> {
+    private MemberService<T> memberService;
 
     @GetMapping("/{id}")
-    public Admin read(@PathVariable long id) {
+    public T read(@PathVariable long id) {
 
-        return null;
+        T member = memberService.get(id);
+
+        return member;
     }
 
-
     @PostMapping()
-    public Long create(@RequestBody Admin admin) {
+    public Long create(@RequestBody T member) {
 
-        return 0L;
+        Long memberId = memberService.save(member);
+
+        return memberId;
     }
 
     @PutMapping("/{id}")
     public void update(@PathVariable long id) {
 
+        System.out.println("update");
     }
 
     @DeleteMapping()
     public void delete(@PathVariable long id) {
 
+        System.out.println("delete");
     }
-
 }

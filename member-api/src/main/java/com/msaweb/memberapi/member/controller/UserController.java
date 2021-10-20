@@ -1,5 +1,6 @@
 package com.msaweb.memberapi.member.controller;
 
+import com.msaweb.memberapi.member.model.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping("/member")
-@RequiredArgsConstructor
-public class UserController {
+@RequestMapping("/member/user")
+public class UserController extends MemberController<User>{
+
 }

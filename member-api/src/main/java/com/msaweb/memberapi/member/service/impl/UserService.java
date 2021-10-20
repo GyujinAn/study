@@ -1,7 +1,8 @@
 package com.msaweb.memberapi.member.service.impl;
 
-import com.msaweb.memberapi.member.model.entity.Provider;
-import com.msaweb.memberapi.member.service.ProviderService;
+import com.msaweb.memberapi.member.model.entity.Admin;
+import com.msaweb.memberapi.member.model.entity.User;
+import com.msaweb.memberapi.member.service.MemberService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,19 +12,19 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class ProviderServiceImpl implements ProviderService {
+public class UserService implements MemberService<User> {
     @Override
-    public Provider get(Long id) {
+    public User get(Long id) {
         return null;
     }
 
     @Override
-    public Long save(Provider provider) {
+    public Long save(User user) {
         return null;
     }
 
     @Override
-    public Long update(Provider provider) {
+    public Long update(User user) {
         return null;
     }
 
