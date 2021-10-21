@@ -1,8 +1,12 @@
-package tacos;
+package tacos.jpa.entity;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import tacos.jpa.entity.IngredientEntity;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  * @author agj017@gmail.com
@@ -10,7 +14,11 @@ import tacos.jpa.entity.IngredientEntity;
  */
 @Data
 @RequiredArgsConstructor
-public class Ingredient {
+@NoArgsConstructor(access=AccessLevel.PUBLIC, force=true)
+@Entity
+public class IngredientEntity {
+
+    @Id
     private final String id;
     private final String name;
     private final Type type;
@@ -18,5 +26,4 @@ public class Ingredient {
     public static enum Type {
         WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE
     }
-
 }
