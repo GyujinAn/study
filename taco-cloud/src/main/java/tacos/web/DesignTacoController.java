@@ -12,6 +12,10 @@ import tacos.Order;
 import tacos.Taco;
 import tacos.data.IngredientRepository;
 import tacos.data.TacoRepository;
+import tacos.jpa.entity.IngredientEntity;
+import tacos.jpa.entity.TacoEntity;
+import tacos.jpa.repo.IngredientRepo;
+import tacos.jpa.repo.TacoRepo;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -24,6 +28,7 @@ import java.util.stream.Collectors;
 /**
  * @author agj017@gmail.com
  * @since 2021/10/07
+ *
  */
 @Slf4j
 @Controller
@@ -31,12 +36,12 @@ import java.util.stream.Collectors;
 @SessionAttributes("order")
 public class DesignTacoController {
 
-    private final IngredientRepository ingredientRepository;
+    private final IngredientRepo ingredientRepository;
 
-    private TacoRepository tacoRepository;
+    private TacoRepo tacoRepository;
 
     @Autowired
-    public DesignTacoController(IngredientRepository ingredientRepository, TacoRepository tacoRepository){
+    public DesignTacoController(IngredientRepo ingredientRepository, TacoRepo tacoRepository){
         this.ingredientRepository = ingredientRepository;
         this.tacoRepository = tacoRepository;
     }
@@ -62,7 +67,7 @@ public class DesignTacoController {
 //        int [] arr = new int[5];
 //        Arrays.setAll(arr, (i) -> (int)(Math.random()*5)+1);
 
-        List<Ingredient> ingredients = new ArrayList<>();
+        List<IngredientEntity> ingredients = new ArrayList<>();
         ingredientRepository.findAll().forEach(i -> ingredients.add(i));
 
 
@@ -73,7 +78,7 @@ public class DesignTacoController {
                     filterByType(ingredients, type));
         }
 
-        model.addAttribute("taco", new Taco());
+        model.addAttribute("taco", new TacoEntity());
 
         log.info("model in showDesignForm: "+model.toString());
         log.info("session in showDesignForm: "+session.toString());
@@ -84,7 +89,7 @@ public class DesignTacoController {
         return "design";
     }
 
-    private List<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
+    private List<IngredientEntity> filterByType(List<IngredientEntity> ingredients, Type type) {
 
         return ingredients
                 .stream()
@@ -99,13 +104,13 @@ public class DesignTacoController {
     }
 
     @ModelAttribute(name = "taco")
-    public Taco taco() {
+    public TacoEntity taco() {
         log.info("DesignTacoController.taco() is called");
-        return new Taco();
+        return new TacoEntity();
     }
 
     @PostMapping
-    public String processDesign(@Valid Taco design, Errors errors, @ModelAttribute Order order, HttpSession session, Model model){
+    public String processDesign(@Valid TacoEntity design, Errors errors, @ModelAttribute Order order, HttpSession session, Model model){
         log.info("started processDesign");
         if (errors.hasErrors()){
             log.info(errors.toString());
@@ -117,7 +122,7 @@ public class DesignTacoController {
         log.info("model in processDesign " + model.toString());
 
         log.info("Processing design: " + design);
-        Taco saved = tacoRepository.save(design);
+        TacoEntity saved = tacoRepository.save(design);
         order.addDesign(saved);
 
         return "redirect:/orders/current";

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import tacos.Order;
 import tacos.data.OrderRepository;
+import tacos.jpa.entity.OrderEntity;
+import tacos.jpa.repo.OrderRepo;
 
 import javax.validation.Valid;
 
@@ -24,9 +26,9 @@ import javax.validation.Valid;
 @SessionAttributes("order")
 public class OrderController {
 
-    private OrderRepository orderRepository;
+    private OrderRepo orderRepository;
 
-    public OrderController(OrderRepository orderRepository) {
+    public OrderController(OrderRepo orderRepository) {
         this.orderRepository = orderRepository;
     }
 
@@ -39,7 +41,7 @@ public class OrderController {
     }
 
     @PostMapping
-    public String processOrder(@Valid Order order, Errors errors, SessionStatus sessionStatus){
+    public String processOrder(@Valid OrderEntity order, Errors errors, SessionStatus sessionStatus){
 
         if(errors.hasErrors()){
             return "orderForm";
