@@ -2,23 +2,22 @@ package tacos.jpa.repo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import tacos.jpa.entity.IngredientEntity;
-
-import static org.junit.jupiter.api.Assertions.*;
+import tacos.Ingredient;
+import tacos.data.IngredientRepository;
 
 /**
  * @author agj017@gmail.com
  * @since 2021/10/21
  */
-class IngredientRepoTest {
+class IngredientRepositoryTest {
 
     @Autowired
-    IngredientRepo ingredientRepo;
+    IngredientRepository ingredientRepository;
 
     @Test
     public void testSave() throws Exception{
 
-        ingredientRepo.save(new IngredientEntity("FLTO", "Flour Tortilla", IngredientEntity.Type.WRAP));
+        ingredientRepository.save(new Ingredient("FLTO", "Flour Tortilla", Ingredient.Type.WRAP));
 
     }
 
