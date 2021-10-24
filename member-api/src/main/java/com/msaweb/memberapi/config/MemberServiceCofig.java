@@ -1,13 +1,5 @@
 package com.msaweb.memberapi.config;
 
-import com.msaweb.memberapi.member.model.entity.Admin;
-import com.msaweb.memberapi.member.model.entity.Provider;
-import com.msaweb.memberapi.member.model.entity.User;
-import com.msaweb.memberapi.member.service.MemberService;
-import com.msaweb.memberapi.member.service.impl.AdminServiceImpl;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
 /**
  * @author agj017@gmail.com
  * @since 2021/10/04

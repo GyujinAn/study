@@ -1,6 +1,7 @@
 package com.msaweb.memberapi.member.controller;
 
 import com.msaweb.memberapi.member.model.entity.Admin;
+import com.msaweb.memberapi.member.model.entity.Member;
 import com.msaweb.memberapi.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2021/10/19
  */
 @RequiredArgsConstructor
-abstract class MemberController<T> {
+abstract class MemberController<T extends Member> {
     private MemberService<T> memberService;
 
     @GetMapping("/{id}")

@@ -1,5 +1,6 @@
 package com.msaweb.memberapi.member.service;
 
+import com.msaweb.memberapi.member.model.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
@@ -8,8 +9,13 @@ import java.util.Optional;
  * @author agj017@gmail.com
  * @since 2021/10/19
  */
-public abstract class AbstractMemberService<T> {
-    JpaRepository<T, Long> repo;
+public abstract class AbstractMemberService<T extends Member> {
+
+    protected JpaRepository<T, Long> repo;
+
+    public AbstractMemberService(JpaRepository<T, Long> repo) {
+        this.repo = repo;
+    }
 
     T get(Long id){
         T member = repo.getById(id);
@@ -18,24 +24,24 @@ public abstract class AbstractMemberService<T> {
 
     Long save(T member){
         T savedMember = repo.save(member);
-        return getMemberId(member);
+
+        return savedMember.getId();
+
     };
 
 
-    Long update(T member){
+    Long update(T updatedMember){
 
-        Long memberId = getMemberId(member);
+        Long memberId = updatedMember.getId();
         Optional<T> byId = repo.findById(memberId);
-
-        putMemberInfo(member);
+        T oldMember = byId.get();
+        //putMemberInfo(member);
 
         return memberId;
     };
 
     void delete(Long id){
     };
-
-    abstract protected Long getMemberId(T member);
 
     abstract protected Long putMemberInfo(T member);
 
