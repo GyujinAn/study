@@ -35,11 +35,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .access("permitAll")
                 .and()
                 .formLogin()
-                .loginPage("/login");
+                .loginPage("/login")
+                .defaultSuccessUrl("/design")
+                .and()
+                .logout()
+                .logoutSuccessUrl("/")
+                .and()
+                .csrf();
+//                .disable();
+//
+//                .loginProcessingUrl("/authenticate")
+//                .usernameParameter("user")
+//                .passwordParameter("pwd");
+
+//                .defaultSuccessUrl("/design");
+
+//                .defaultSuccessUrl("/design", true);
+
+
+
     }
 
     @Bean
     public PasswordEncoder encoder() {
+
         return new BCryptPasswordEncoder();
     }
 
@@ -47,6 +66,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
         auth.userDetailsService(userDetailsService)
-        .passwordEncoder(encoder());
+                .passwordEncoder(encoder());
     }
 }

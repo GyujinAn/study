@@ -1,4 +1,4 @@
-package tacos.web;
+package tacos.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,8 +20,8 @@ import tacos.security.RegistrationForm;
 @RequiredArgsConstructor
 public class RegistrationController {
 
-    private UserRepository userRepository;
-    private PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping
     public String registerForm() {
@@ -31,6 +31,7 @@ public class RegistrationController {
 
     @PostMapping
     public String processRegistration(RegistrationForm form) {
+
         userRepository.save(form.toUser(passwordEncoder));
 
         return "redirect:/login";

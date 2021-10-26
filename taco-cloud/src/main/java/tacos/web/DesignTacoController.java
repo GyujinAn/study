@@ -10,12 +10,15 @@ import tacos.Ingredient;
 import tacos.Ingredient.Type;
 import tacos.Order;
 import tacos.Taco;
+import tacos.User;
 import tacos.data.IngredientRepository;
 import tacos.data.TacoRepository;
+import tacos.data.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,14 +38,21 @@ public class DesignTacoController {
 
     private TacoRepository tacoRepository;
 
+    private UserRepository userRepository;
+
     @Autowired
-    public DesignTacoController(IngredientRepository ingredientRepository, TacoRepository tacoRepository){
+    public DesignTacoController(
+            IngredientRepository ingredientRepository,
+            TacoRepository tacoRepository,
+            UserRepository userRepository){
         this.ingredientRepository = ingredientRepository;
         this.tacoRepository = tacoRepository;
+        this.userRepository = userRepository;
     }
 
+    //HttpServletRequest는 테스트용으로 만들어 봄 비즈니스 로직상 필요한게 아님
     @GetMapping
-    public String showDesignForm(Model model, HttpServletRequest request){
+    public String showDesignForm(Model model, HttpServletRequest request, Principal principal){
 
         HttpSession session = request.getSession();
 
@@ -73,7 +83,13 @@ public class DesignTacoController {
                     filterByType(ingredients, type));
         }
 
-        model.addAttribute("taco", new Taco());
+
+//        model.addAttribute("taco", new Taco());
+
+        String username = principal.getName();
+        User user = userRepository.findByUsername(username);
+        model.addAttribute("user", user);
+
 
         log.info("model in showDesignForm: "+model.toString());
         log.info("session in showDesignForm: "+session.toString());
