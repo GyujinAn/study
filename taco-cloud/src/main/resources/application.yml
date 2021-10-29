@@ -31,3 +31,7 @@ logging:
     root: debug
     org.hibernate.SQL: debug
     org.hibernate.type: trace
+
+taco:
+  orders:
+    page-size: 10
