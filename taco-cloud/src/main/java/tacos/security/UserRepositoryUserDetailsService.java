@@ -16,7 +16,7 @@ import tacos.data.UserRepository;
 @RequiredArgsConstructor
 public class UserRepositoryUserDetailsService implements UserDetailsService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
