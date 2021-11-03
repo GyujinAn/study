@@ -2,7 +2,9 @@ package com.msaweb.memberapi.member.service.impl;
 
 import com.msaweb.memberapi.member.model.entity.Admin;
 import com.msaweb.memberapi.member.model.entity.User;
+import com.msaweb.memberapi.member.repository.UserRepository;
 import com.msaweb.memberapi.member.service.MemberService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,7 +14,12 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class UserService implements MemberService<User> {
+
+
+    private final UserRepository userRepository;
+
     @Override
     public User get(Long id) {
         return null;
@@ -20,7 +27,9 @@ public class UserService implements MemberService<User> {
 
     @Override
     public Long save(User user) {
-        return null;
+
+        User save = userRepository.save(user);
+        return save.getId();
     }
 
     @Override
