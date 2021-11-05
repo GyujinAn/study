@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/resource1/resource1.iml" filepath="$PROJECT_DIR$/resource1/resource1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/resource2/resource2.iml" filepath="$PROJECT_DIR$/resource2/resource2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/resource3/resource3.iml" filepath="$PROJECT_DIR$/resource3/resource3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sso-study.iml" filepath="$PROJECT_DIR$/sso-study.iml" />
+    </modules>
+  </component>
+</project>
