@@ -1,2 +1,16 @@
-target/
+
+#Intelli J IDEA Module file
+*.iml
+
+
+# Created by .ignore support plugin (hsz.mobi)
+workspace.xml
+.idea
+package-lock.json
+node_modules
+.project
+target
+static
+logs
+.DS_Store
 
