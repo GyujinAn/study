@@ -2,6 +2,12 @@
 #Intelli J IDEA Module file
 *.iml
 
+#database
+*.db
+
+#keycloak
+keycloak-15.0.2
+
 
 # Created by .ignore support plugin (hsz.mobi)
 workspace.xml

@@ -1,6 +1,0 @@
-#FileLock
-#Mon Oct 25 13:22:52 KST 2021
-hostName=192.168.0.8
-id=17cb5afd5a922d336c4b4fddec04876d2148873a6a3
-method=file
-server=192.168.0.8\:51525
