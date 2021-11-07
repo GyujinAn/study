@@ -1,9 +1,9 @@
 
 #Intelli J IDEA Module file
-*.iml
+.iml
 
 #database
-*.db
+.db
 
 #keycloak
 keycloak-15.0.2
