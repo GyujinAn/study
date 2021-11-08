@@ -1,22 +1,31 @@
 
 #Intelli J IDEA Module file
-.iml
+*.iml
 
 #database
-.db
+*.db
 
 #keycloak
-keycloak-15.0.2
+keycloak-15.0.2/
 
 
 # Created by .ignore support plugin (hsz.mobi)
 workspace.xml
-.idea
+
+.idea/
+
 package-lock.json
-node_modules
+
+node_modules/
+
 .project
-target
-static
-logs
-.DS_Store
+
+target/
+
+static/
+
+logs/
+
+.DS_Store/
+
 
