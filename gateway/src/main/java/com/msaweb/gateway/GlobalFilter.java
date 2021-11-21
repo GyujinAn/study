@@ -5,12 +5,18 @@ import com.msaweb.gateway.data.HttpMessageRepo;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
+import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
+import org.apache.http.impl.nio.client.HttpAsyncClients;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
+import org.springframework.http.client.reactive.ClientHttpConnector;
+import org.springframework.http.client.reactive.HttpComponentsClientHttpConnector;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
@@ -34,6 +40,25 @@ public class GlobalFilter extends AbstractGatewayFilterFactory<GlobalFilter.Conf
 
     @Override
     public GatewayFilter apply(Config config) {
+        
+
+        log.info("webclient started");
+        HttpAsyncClientBuilder clientBuilder = HttpAsyncClients.custom();
+        clientBuilder.setDefaultRequestConfig(...);
+        CloseableHttpAsyncClient client = clientBuilder.build();
+        ClientHttpConnector connector = new HttpComponentsClientHttpConnector(client);
+
+        WebClient webClient = WebClient.builder().clientConnector(connector).build();
+
+        Mono<String> stringMono = webClient.get()
+                .uri("localhost:8080/member/checkLogin")
+                .retrieve()
+                .bodyToMono(String.class);
+
+        log.info(stringMono.toString());
+
+
+        log.info("webclient ended");
 
 
         return ((exchange, chain) -> {

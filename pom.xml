@@ -11,6 +11,8 @@
 	<modules>
 		<module>member-api</module>
         <module>gateway</module>
+		<module>shopping-api</module>
+		<module>spring-test</module>
 	</modules>
 
 

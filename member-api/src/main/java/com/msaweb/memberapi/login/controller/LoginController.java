@@ -44,10 +44,12 @@ public class LoginController {
     @GetMapping("/checkLogin")
     public String checkLogin(HttpSession httpSession){
 
-        if(httpSession == null){
-            return "null";
-        }
-        return httpSession.getAttribute("lgoinId").toString();
+        return "checkLogin";
+
+//        if(httpSession == null){
+//            return "null";
+//        }
+//        return httpSession.getAttribute("lgoinId").toString();
 
     }
 }

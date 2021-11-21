@@ -2,6 +2,7 @@ server:
   port: 8081
 
 ---
+
 spring:
   cloud:
     gateway:
@@ -34,9 +35,9 @@ spring:
             allow-credentials: true
       default-filters:
         - name: GlobalFilter
-#          args:
-#            preFilter: true
-#            postFilter: true
+          args:
+            preFilter: true
+            postFilter: true
       routes:
         - id: member-svc
           uri: http://localhost:8080/
@@ -44,9 +45,23 @@ spring:
             - Path=/member/**
           filters:
             - name: MemberFilter
-#              args:
-#                preFilter: true
-#                postFilter: true
+              args:
+                preFilter: true
+                postFilter: true
+        - id: shopping-svc
+          uri: http://localhost:8089/
+          predicates:
+            - Path=/api/**
+          filters:
+            - name: MemberFilter
+              args:
+                preFilter: true
+                postFilter: true
+
+        - id: test-svc
+          uri: http://localhost:9090/
+          predicates:
+            - Path=/resource1/**
 
   datasource:
     url: jdbc:h2:tcp://localhost/~/workspace/h2/sample-db
