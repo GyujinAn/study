@@ -13,15 +13,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/resource1")
 public class WebClientTestController {
-
-
-    @GetMapping
-    public String test() {
-
-        HttpAsyncClientBuilder clientBuilder = HttpAsyncClients.custom();
-        clientBuilder.setDefaultRequestConfig(...);
-        CloseableHttpAsyncClient client = clientBuilder.build();
-        ClientHttpConnector connector = new HttpComponentsClientHttpConnector(client);
-        return "helloworld";
-    }
+    
 }
