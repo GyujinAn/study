@@ -1,0 +1,9 @@
+package kakaostyle.documentapproval.user;
+
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
+
+public interface KakaoUserRepository extends CrudRepository<KakaoUser, Long> {
+    KakaoUser findByEmail(String email);
+}

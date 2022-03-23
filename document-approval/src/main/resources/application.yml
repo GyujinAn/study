@@ -1,0 +1,25 @@
+
+jwt:
+  secret: kakaostyle
+
+logging:
+  level:
+    root: debug
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
+
+spring:
+  datasource:
+    url: jdbc:mariadb://localhost:3306/kakaostyle
+    username: root
+    password:
+    driver-class-name: org.mariadb.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        #        show_sql: true
+        format_sql: true
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect

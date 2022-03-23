@@ -7,7 +7,8 @@
 
 #keycloak
 keycloak-15.0.2/
-
+*.trace.db
+*.log
 
 # Created by .ignore support plugin (hsz.mobi)
 workspace.xml
@@ -26,5 +27,5 @@ static/
 
 logs/
 
-
 .DS_Store
+
