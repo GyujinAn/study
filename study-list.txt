@@ -1,0 +1,15 @@
+cka 자격증 
+aws 자격증
+도메인주도 설계란
+피보나치 수열 블로그 
+Spring DI framework 란?
+자바 Stream?
+Jpa를 사용하는 이유 5가지
+SOLID원칙 정리
+AOP security filter interceptor 관계확인하기
+GC
+	https://d2.naver.com/helloworld/329631
+DB 
+	select 실행계획
+@Autowird와 @Setter를 통해서 의존성을 주입하지 않는 이유
+LocalDate, LocalTime, LocalDateTime, ZonedDateTime 이란
